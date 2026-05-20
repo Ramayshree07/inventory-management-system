@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+*{
+    box-sizing: border-box;
+    font-family: Arial,  sans-serif;
+}
+ body{
+    margin: 0;
+    background: #f4f6f8;
+    padding: 0;
+ }
+
+ h2{
+    margin-bottom: 20px;
+    color: #333;
+ }
+
+ input,button{
+    padding: 10px;
+    margin:8px 0;
+    border-radius: 4px;
+    width: 100%;
+    border:1px solid #ccc;
+ }
+
+ button{
+    background: #1976d2;
+    color:white;
+    border:none;
+    cursor:pointer;
+
+ }
+ button:hover{
+    background: #125aa0;
+ }
+ .list{
+    list-style: none;
+    padding: 0;
+ }
+
+ .list li{
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+ }
+ .login-container{
+   display: flex;
+   flex-direction:column;
+    height:100vh;
+    align-items: center;
+    justify-content: center;
+    gap:1.5rem;
+    background: linear-gradient(to bottom ,  
+                  #16a34a 50%,        /* from-green-600 */
+                                         /* via-green-300 (middle) */
+                  #f3f4f6 50%);     /* to-gray-100 */
+ }
+ .heading{
+   font-size: medium;
+   font-weight: bold;
+ }
+.add{
+ /*"bg-red-500 text-white px-3 py-1 roundedhover:bg-red-600"*/
+ background-color: red;  
+
+}
+button.hover{
+   background: rgb(160, 3, 3);
+}
