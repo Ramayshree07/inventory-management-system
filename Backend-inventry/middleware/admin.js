@@ -9,8 +9,11 @@
       if (!req.user) {
         return res.status(401).send("Unauthorized. No user information found.");
       }
+       
+     const role = (req.user.role || "").trim().toLowerCase();
 
-      if (req.user.role !== "admin") {
+
+      if (role !== "admin") {
         return res.status(403).send("Admin access only.");
       }
 

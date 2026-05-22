@@ -28,9 +28,14 @@ const Users = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUsers(res.data))
-      .catch(() => setError("failed to load users"))
+      .catch((err) => {
+        console.log("ERROR:", err.response || err.message);
+        setError("failed to load users");
+      })
       .finally(() => setLoading(false));
   }, [token]);
+
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -75,13 +80,11 @@ const Users = () => {
       console.error("Delete failed:", err.response?.data || err);
     }
   };
-  const filteredUsers =
-   users.filter((user)=>
-    user.name.toLowerCase().includes(search.toLowerCase())||
-
-   user.email.toLowerCase().includes(search.toLowerCase())||
-
-   user.role.toLowerCase().includes(search.toLowerCase())
+  const filteredUsers = users.filter(
+    (user) =>
+      (user.name || "").toLowerCase().includes(search.toLowerCase()) ||
+      (user.email || "").toLowerCase().includes(search.toLowerCase()) ||
+      (user.role || "").toLowerCase().includes(search.toLowerCase()),
   );
   return (
     <div className="p-6 min-h-screen wb-1 bg-gray-200">
@@ -125,9 +128,9 @@ const Users = () => {
         <div className="md:col-span-2 bg-white p-6 rounded shadow">
           <div className="flex justify-end mb-4">
             <input
-            type= "text"
-            value={search}
-            onChange={(e)=>setSearch(e.target.value)}
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder="search"
               className="border px-3 py-2 rounded w-64"
             />
@@ -148,7 +151,7 @@ const Users = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((u, i) => {
+                    {filteredUsers.map((u, i) => {
                       return (
                         <tr key={u.id}>
                           <td className="border p-2">{i + 1}</td>

@@ -6,7 +6,7 @@ const auth=require("../middleware/auth");
 const admin=require("../middleware/admin")
 
 //get All Users (Admin)
-router.get("/", admin, async(req,res)=>{
+router.get("/",auth, admin, async(req,res)=>{
   try{
     const[users] =await pool.query(
         "SELECT id, name, email,role FROM users"
@@ -19,9 +19,10 @@ router.get("/", admin, async(req,res)=>{
   } 
 })
 // create user(Admin)
-router.post("/",admin, async(req,res)=>{
+router.post("/", auth,admin, async(req,res)=>{
  try{
     const {name, email, password, role}=req.body;
+
     if(!name || !email || !password ){
         return res.status(400).send("missing required fields");
     }
